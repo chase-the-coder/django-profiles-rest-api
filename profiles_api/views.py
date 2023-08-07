@@ -30,3 +30,8 @@ class HelloApiView(APIView):
             name = serializer.validated_data.get('name')
             message = f'Hello {name}!' # f is required for string interpolation
             return Response({'message': message})
+        else:
+            return Response(
+                serializer.errors,
+                status=status.HTTP_400_BAD_REQUEST # status is required for status
+            )
